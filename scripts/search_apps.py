@@ -6,16 +6,13 @@ DB_PATH = "./data/apps.json"
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 TOP_K = 5
 
-# Load model
 model = SentenceTransformer(MODEL_NAME)
 
-# Load database
 with open(DB_PATH, "r", encoding="utf-8") as f:
     db = json.load(f)
 
 apps = db["apps"]
 
-# Pre-load embeddings
 app_embeddings = []
 valid_apps = []
 
@@ -25,27 +22,70 @@ for app in apps:
         valid_apps.append(app)
 
 app_embeddings = np.array(app_embeddings)
+app_embeddings = app_embeddings / np.linalg.norm(
+    app_embeddings, axis=1, keepdims=True
+)
 
 
-def cosine_similarity(a, b):
-    return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
+def keyword_score(query: str, app: dict) -> float:
+    query = query.lower()
+
+    text = " ".join(
+        [
+            app.get("name", ""),
+            " ".join(app.get("aliases", [])),
+            " ".join(app.get("features", [])),
+        ]
+    ).lower()
+
+    score = 0.0
+    for token in query.split():
+        if token in text:
+            score += 1
+
+    return min(score / 5, 1.0) 
+
+
+def category_boost(query: str, app: dict) -> float:
+    if app.get("category", "").lower() in query.lower():
+        return 1.0
+    return 0.0
 
 
 def search_apps(query: str, top_k: int = TOP_K):
     query_embedding = model.encode(query)
+    query_embedding = query_embedding / np.linalg.norm(query_embedding)
 
-    scores = []
+    semantic_scores = np.dot(app_embeddings, query_embedding)
 
-    for idx, app_embedding in enumerate(app_embeddings):
-        score = cosine_similarity(query_embedding, app_embedding)
-        scores.append((score, valid_apps[idx]))
+    results = []
 
-    scores.sort(key=lambda x: x[0], reverse=True)
+    for idx, app in enumerate(valid_apps):
+        sem_score = float(semantic_scores[idx])
+        key_score = keyword_score(query, app)
+        cat_boost = category_boost(query, app)
 
-    return scores[:top_k]
+        final_score = (
+            0.7 * sem_score
+            + 0.2 * key_score
+            + 0.1 * cat_boost
+        )
+
+        results.append(
+            {
+                "app": app,
+                "semantic_score": sem_score,
+                "keyword_score": key_score,
+                "category_boost": cat_boost,
+                "final_score": final_score,
+            }
+        )
+
+    results.sort(key=lambda x: x["final_score"], reverse=True)
+
+    return results[:top_k]
 
 
-# ===== CLI TEST =====
 if __name__ == "__main__":
     while True:
         query = input("\n🔎 Search (ketik 'exit' untuk keluar): ")
@@ -55,8 +95,11 @@ if __name__ == "__main__":
         results = search_apps(query)
 
         print("\n📌 Hasil Pencarian:")
-        for rank, (score, app) in enumerate(results, start=1):
+        for i, r in enumerate(results, 1):
+            app = r["app"]
             print(
-                f"{rank}. {app['name']} "
-                f"(category: {app['category']}, score: {score:.3f})"
+                f"{i}. {app['name']} "
+                f"(final: {r['final_score']:.3f}, "
+                f"semantic: {r['semantic_score']:.3f}, "
+                f"keyword: {r['keyword_score']:.2f})"
             )
