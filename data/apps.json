@@ -1,0 +1,129 @@
+{
+  "meta": {
+    "version": "1.0",
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "last_updated": "2026-01-08"
+  },
+  "apps": [
+    {
+      "id": "app_001",
+      "name": "HR-X9",
+      "aliases": ["absensi HR", "attendance app"],
+      "category": "Human Resource",
+      "description": "Aplikasi absensi karyawan berbasis mobile dengan GPS dan face recognition.",
+      "features": ["absensi karyawan", "GPS tracking", "face recognition"],
+      "search_text": "HR-X9 aplikasi HR untuk absensi karyawan berbasis mobile dengan GPS dan face recognition.",
+      "embedding": [],
+      "content_hash": "",
+      "status": "active"
+    },
+    {
+      "id": "app_002",
+      "name": "FIN-Zero",
+      "aliases": ["keuangan", "finance internal"],
+      "category": "Finance",
+      "description": "Aplikasi pengelolaan anggaran dan laporan keuangan internal.",
+      "features": ["budgeting", "laporan keuangan", "expense tracking"],
+      "search_text": "FIN-Zero aplikasi keuangan internal untuk budgeting, laporan keuangan, dan pencatatan pengeluaran.",
+      "embedding": [],
+      "content_hash": "",
+      "status": "active"
+    },
+    {
+      "id": "app_003",
+      "name": "OPS-42",
+      "aliases": ["operasional", "monitoring operasional"],
+      "category": "Operations",
+      "description": "Aplikasi monitoring operasional harian dan pelaporan aktivitas lapangan.",
+      "features": ["daily report", "operational monitoring"],
+      "search_text": "OPS-42 aplikasi operasional untuk monitoring aktivitas harian dan laporan lapangan.",
+      "embedding": [],
+      "content_hash": "",
+      "status": "active"
+    },
+    {
+      "id": "app_004",
+      "name": "LOG-Trackr",
+      "aliases": ["logistik", "tracking barang"],
+      "category": "Logistics",
+      "description": "Aplikasi pelacakan pengiriman dan manajemen logistik internal.",
+      "features": ["tracking barang", "pengiriman", "logistik"],
+      "search_text": "LOG-Trackr aplikasi logistik untuk pelacakan pengiriman dan manajemen distribusi barang.",
+      "embedding": [],
+      "content_hash": "",
+      "status": "active"
+    },
+    {
+      "id": "app_005",
+      "name": "CRM-Nova",
+      "aliases": ["crm", "customer management"],
+      "category": "Sales",
+      "description": "Aplikasi CRM untuk mengelola data pelanggan dan aktivitas penjualan.",
+      "features": ["customer data", "sales pipeline", "follow up"],
+      "search_text": "CRM-Nova aplikasi CRM untuk mengelola data pelanggan, pipeline penjualan, dan aktivitas follow up.",
+      "embedding": [],
+      "content_hash": "",
+      "status": "active"
+    },
+    {
+      "id": "app_006",
+      "name": "SEC-Lock",
+      "aliases": ["security", "akses sistem"],
+      "category": "Security",
+      "description": "Aplikasi manajemen akses sistem dan autentikasi pengguna.",
+      "features": ["access control", "authentication", "user permission"],
+      "search_text": "SEC-Lock aplikasi keamanan untuk manajemen akses sistem dan autentikasi pengguna.",
+      "embedding": [],
+      "content_hash": "",
+      "status": "active"
+    },
+    {
+      "id": "app_007",
+      "name": "IT-DeskPro",
+      "aliases": ["helpdesk", "ticketing IT"],
+      "category": "IT Support",
+      "description": "Aplikasi helpdesk IT untuk tiket support dan manajemen insiden.",
+      "features": ["IT ticketing", "incident management"],
+      "search_text": "IT-DeskPro aplikasi helpdesk IT untuk ticketing support dan manajemen insiden.",
+      "embedding": [],
+      "content_hash": "",
+      "status": "active"
+    },
+    {
+      "id": "app_008",
+      "name": "PRJ-Flow",
+      "aliases": ["project management", "manajemen proyek"],
+      "category": "Project Management",
+      "description": "Aplikasi manajemen proyek dan kolaborasi tim.",
+      "features": ["task management", "timeline proyek", "kolaborasi tim"],
+      "search_text": "PRJ-Flow aplikasi manajemen proyek untuk task management, timeline, dan kolaborasi tim.",
+      "embedding": [],
+      "content_hash": "",
+      "status": "active"
+    },
+    {
+      "id": "app_009",
+      "name": "INV-Sync",
+      "aliases": ["inventory", "stok barang"],
+      "category": "Inventory",
+      "description": "Aplikasi pencatatan dan sinkronisasi stok barang gudang.",
+      "features": ["stok gudang", "inventory management"],
+      "search_text": "INV-Sync aplikasi inventory untuk pencatatan stok barang dan manajemen gudang.",
+      "embedding": [],
+      "content_hash": "",
+      "status": "active"
+    },
+    {
+      "id": "app_010",
+      "name": "DOC-Hub",
+      "aliases": ["dokumen", "arsip digital"],
+      "category": "Document Management",
+      "description": "Aplikasi pengelolaan dokumen dan arsip digital internal.",
+      "features": ["document storage", "digital archive"],
+      "search_text": "DOC-Hub aplikasi pengelolaan dokumen dan arsip digital internal perusahaan.",
+      "embedding": [],
+      "content_hash": "",
+      "status": "active"
+    }
+  ]
+}
