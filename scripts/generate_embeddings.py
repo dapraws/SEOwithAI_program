@@ -1,12 +1,11 @@
 import json
 import hashlib
 from datetime import datetime
-from sentence_transformers import SentenceTransformer
+from sentence_transformers import SentenceTransformer  # type: ignore
 
 DB_PATH = "./data/apps.json"
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 
-# Load model (sekali saja)
 model = SentenceTransformer(MODEL_NAME)
 
 
@@ -14,7 +13,6 @@ def hash_content(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
-# Load database
 with open(DB_PATH, "r", encoding="utf-8") as f:
     db = json.load(f)
 
@@ -29,7 +27,6 @@ for app in db["apps"]:
 
     new_hash = hash_content(search_text)
 
-    # Skip jika tidak berubah
     if app.get("content_hash") == new_hash and app.get("embedding"):
         continue
 
@@ -43,10 +40,8 @@ for app in db["apps"]:
 
     updated_count += 1
 
-# Update meta
 db["meta"]["last_updated"] = datetime.utcnow().isoformat()
 
-# Save back to file
 with open(DB_PATH, "w", encoding="utf-8") as f:
     json.dump(db, f, indent=2, ensure_ascii=False)
 
