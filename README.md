@@ -11,6 +11,8 @@
   - 50% Semantic similarity
   - 20% Keyword matching
   - 20% Category boost
+- ✅ Incremental embedding update (hash-based)
+- ✅ Model open-source (non-OpenAI)
 
 ---
 
